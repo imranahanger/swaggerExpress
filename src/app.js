@@ -19,7 +19,7 @@ app.use(
   swaggerUi.setup(swaggerDocument, {
     explorer: true,
   })
-); 
+);
 app.use((req, res, next) => {
   const error = new Error('Not found');
   error.message = 'Invalid route';
