@@ -38,5 +38,8 @@ export default {
             console.log(error.message)
             return res.status(500).send(error)
         }
+    },
+    async authenticate(req,res){
+        res.send(req.user)
     }
 }

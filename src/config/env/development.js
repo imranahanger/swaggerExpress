@@ -1,3 +1,3 @@
-export const devConfig = {
-    secret: "this is secret"
+export  const devConfig = {
+    "secret": "this is secret"
 }

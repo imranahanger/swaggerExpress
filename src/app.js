@@ -2,8 +2,10 @@ import express from 'express';
 import logger from 'morgan';
 import { connect } from './config/db';
 import { restRouter } from './api';
-import swaggerUi from 'swagger-ui-express'
+import swaggerUi from 'swagger-ui-express';
+import passport from 'passport'
 import swaggerDocument from './config/swagger.json';
+import { configJWTStrategy } from './api/middleware/passport-jwt';
 const app = express();
 
 const PORT = 3000;
@@ -11,7 +13,8 @@ connect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger('dev'));
-
+app.use(passport.initialize())
+configJWTStrategy()
 app.use('/api', restRouter);
 app.use(
   '/api-docs',
