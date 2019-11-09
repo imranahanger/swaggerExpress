@@ -6,7 +6,7 @@ export default {
         return bcrypt.hashSync(plaintext, salt)
     },
     validatePassword(plainText, encryptedPassword) {
-        console.log("params",plainText,encryptedPassword)
+        console.log("params", plainText, encryptedPassword)
         return bcrypt.compareSync(plainText, encryptedPassword)
     },
     validateSignUp(body) {

@@ -1,5 +1,6 @@
 import userService from "./user.service";
 import User from "./user.model";
+import jwt from "../../helpers/jwt";
 export default {
     async signup(req, res) {
         try {
@@ -26,13 +27,15 @@ export default {
                 })
             }
             const authorization = await userService.validatePassword(value.password, user.password)
-            if(!authorization){
+            if (!authorization) {
                 return res.status(401).json({
                     "error": "unauthorized"
                 })
             }
-            return res.json(user)
+            const token = jwt.issue({ id: user._id }, '1d')
+            return res.json({ token })
         } catch (error) {
+            console.log(error.message)
             return res.status(500).send(error)
         }
     }
