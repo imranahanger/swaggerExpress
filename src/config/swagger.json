@@ -11,6 +11,10 @@
   "basePath": "/api",
   "tags": [
     {
+      "name": "Users",
+      "description": "API for Users Endpoints"
+    },
+    {
       "name": "Songs",
       "description": "API for Songs Endpoints"
     }
@@ -25,6 +29,37 @@
     "application/json"
   ],
   "paths": {
+    "/users/signUp": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Api endpoint to signUp for a user",
+        "description": "Create new user in database",
+        "parameters": [
+          {
+            "name": "User",
+            "description": "user param to create signUp",
+            "in": "body",
+            "required": "true",
+            "schema": {
+              "$ref": "#definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New user created",
+            "schema": {
+              "$ref": "#definitions/userSignUpRes"
+            }
+          }
+        }
+      }
+    },
     "/songs": {
       "post": {
         "tags": [
@@ -49,7 +84,9 @@
         "responses": {
           "200": {
             "description": "New Song created",
-            "$ref": "#definitions/Song"
+            "schema": {
+              "$ref": "#definitions/Song"
+            }
           }
         }
       },
@@ -79,7 +116,9 @@
         "responses": {
           "200": {
             "description": "Find All the Songs",
-            "$ref": "#definitions/Songs"
+            "schema": {
+              "$ref": "#definitions/Songs"
+            }
           }
         }
       }
@@ -106,7 +145,9 @@
         "responses": {
           "200": {
             "description": "song has found",
-            "$ref": "#definitions/Song"
+            "schema": {
+              "$ref": "#definitions/Song"
+            }
           }
         }
       },
@@ -122,7 +163,9 @@
         "responses": {
           "200": {
             "description": "song has been deleted",
-            "$ref": "#definitions/Song"
+            "schema": {
+              "$ref": "#definitions/Song"
+            }
           }
         }
       },
@@ -148,13 +191,47 @@
         "responses": {
           "200": {
             "description": "Update has song",
-            "$ref": "#definitions/Song"
+            "schema": {
+              "$ref": "#definitions/Song"
+            }
           }
         }
       }
     }
   },
   "definitions": {
+    "userSignUpRes": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "User": {
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
     "Song": {
       "required": [
         "title",
